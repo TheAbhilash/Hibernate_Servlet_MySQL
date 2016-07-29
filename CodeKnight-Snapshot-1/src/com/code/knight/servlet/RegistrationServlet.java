@@ -3,6 +3,7 @@ package com.code.knight.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,17 +28,13 @@ public class RegistrationServlet extends HttpServlet {
 		if(userPwd_1.equals(userPwd_2)){
 			pw.println("<h1>Welcome [ "+userName+" ] You have been registred successfully.</h1>");
 		}else{
-			pw.println("Different Password"+getIndexPage());
+			 //communicating a simple String message.
+		    String message = "PASSWORD doesn't Match.";
+		    request.setAttribute("message", message);
+		    request.getRequestDispatcher("index.jsp").forward(request,response);
 		}
 			
 
-	}
-	
-	private String getIndexPage(){
-		String hd="<form action=./index.html>"
-		+"<br><input type=submit value=Back>"
-		+"</form>";
-		return hd;
 	}
 
 }

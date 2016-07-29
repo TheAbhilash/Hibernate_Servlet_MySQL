@@ -30,6 +30,30 @@ body {
   text-decoration: none;
 }
 
+
+/* After Error */
+.after-error {
+  padding: 50px 0;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.after-error h3 {
+  margin: 0 0 20px;
+  font-size: 48px;
+  font-weight: 300;
+}
+.after-error span {
+  font-size: 12px;
+}
+.after-error span .fa {
+  color: #ed2553;
+}
+.after-error span a {
+  color: #ed2553;
+  font-weight: 600;
+  text-decoration: none;
+}
+
 /* Rerun */
 .rerun {
   margin: 0 0 30px;
