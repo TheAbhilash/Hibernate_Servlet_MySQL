@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.code.knight.dto.User;
+import com.code.knight.service.LoginService;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -23,8 +26,19 @@ public class LoginServlet extends HttpServlet {
 		String userName = request.getParameter("Username");
 		String userPwd = request.getParameter("Password");
 		
-		pw.println("<h3>Welcome :"+userName+".</h3>");
-		
+	     LoginService loginService = new LoginService();
+	     boolean result = loginService.authencateUser(userName, userPwd);
+	     User user = loginService.getUserByUserId(userName);
+	     if(result == true){
+	    	 String name = user.getUserName();
+	    	 String userLoginMessge = "Welcome "+name;
+			 request.setAttribute("name", userLoginMessge);
+			 request.getRequestDispatcher("index.jsp").forward(request,response);
+	     }
+	     else{
+	         response.sendRedirect("error.jsp");
+	     }
+	
 	}
 
 }

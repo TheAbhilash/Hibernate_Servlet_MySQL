@@ -3,12 +3,14 @@ package com.code.knight.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.code.knight.dto.User;
+import com.code.knight.service.RegisterService;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -26,7 +28,16 @@ public class RegistrationServlet extends HttpServlet {
 		String userPwd_2 = request.getParameter("Password_2");
 		
 		if(userPwd_1.equals(userPwd_2)){
-			pw.println("<h1>Welcome [ "+userName+" ] You have been registred successfully.</h1>");
+			User user = new User();
+			user.setUserName(userName);
+			user.setPassword(userPwd_2);
+			userPwd_1 = null;			
+			RegisterService registerService = new RegisterService();
+	        boolean result = registerService.register(user);
+	        String message = "User Has Been Successfully Registered.";
+		    request.setAttribute("message", message);
+		    request.getRequestDispatcher("index.jsp").forward(request,response);
+	         
 		}else{
 			 //communicating a simple String message.
 		    String message = "PASSWORD doesn't Match.";
